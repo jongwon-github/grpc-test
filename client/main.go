@@ -16,7 +16,7 @@ func main() {
 	}
 
 	c := pb.NewConfigStoreClient(conn)
-    defer conn.Close()
+    	defer conn.Close()
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
