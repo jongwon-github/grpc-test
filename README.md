@@ -22,3 +22,11 @@ stub 을 활용해 실행될 프로시저를 구현하거나 전달할 파라미
 ## .proto 와 stub 파일
 protocol buffer 를 사용하는 이점중 하나는 .proto 파일로 구조화된 데이터를 작성하기만 한다면 gRPC가 지원하는 어떤 언어에서든 규약에 상관없이 통신이 가능하다는 것입니다.
 작성된 .proto 로부터 언어에 맞는 stub 를 생산하여 참조하게 되면 이후 별도의 사양서를 볼 필요없이 참조한 stub 만으로도 개발이 가능합니다.
+
+## gRPC plugin
+gRPC 용으로 좀더 활용 가치가 있는 stub 을 만들기위해서는 protoc 에 grpc plugin 바이너리를 전달해야 합니다. 각 언어마다 plugin 이 존재하므로 해당 플러그인을 직접 구해서 stub 을 만들면 됩니다.
+1. protoc 설치
+   * go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+   * go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+2. stub(pb.go) 생성
+   * protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative config/config.proto
